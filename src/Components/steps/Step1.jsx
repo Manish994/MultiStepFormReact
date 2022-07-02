@@ -1,4 +1,4 @@
-import { Box, Grid, Paper } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import React from "react";
 import {
   renderInputBox,
@@ -9,7 +9,7 @@ import {
 
 export default function Step1({ state, handleInputChange, handleNext }) {
   return (
-    <Paper component={Box} p={2}>
+    <>
       <Box mt={1} mb={2}>
         {renderText({ label: "Please Fill Personal Details", variant: "h6" })}
       </Box>
@@ -71,6 +71,6 @@ export default function Step1({ state, handleInputChange, handleNext }) {
           })}
         </Box>
       </Grid>
-    </Paper>
+    </>
   );
 }

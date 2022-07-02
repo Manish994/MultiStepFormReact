@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Box, Grid, withStyles, Paper } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  withStyles,
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+} from "@material-ui/core";
 import PropTypes from "prop-types";
 import { Styles } from "./commons/style";
 import { renderText } from "./commons/displayComponents";
@@ -44,7 +52,8 @@ class FormComponents extends Component {
 
     const handleNext = () => {
       let { currentStep } = this.state;
-      currentStep += currentStep + 1;
+      currentStep = currentStep + 1;
+      console.log(currentStep);
       this.setState({ currentStep });
     };
     const handlePrev = () => {
@@ -53,11 +62,24 @@ class FormComponents extends Component {
       this.setState({ currentStep });
     };
 
+    const StepperSteps = [
+      { label: "Personal Bio" },
+      { label: "Education" },
+      { label: "Professional" },
+    ];
+
     return (
       <Grid container className={classes.formContainer}>
         <Grid item xs={12} sm={7}>
           <Box p={2} mb={2} component={Paper}>
-            {renderText({ label: "Stepper Component" })}
+            {renderText({ label: "Multi Step Sign Up Form" })}
+            <Stepper activeStep={this.state.currentStep} alternativeLabel>
+              {StepperSteps.map((item, index) => (
+                <Step key={index}>
+                  <StepLabel>{item.label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
           </Box>
           <Box component={Paper}>
             <form className={classes.form}>
