@@ -9,7 +9,7 @@ export const Styles = {
   },
 
   form: {
-    minHeight: "350px",
+    minHeight: "300px",
     padding: "16px",
     margin: "20px 0",
   },
