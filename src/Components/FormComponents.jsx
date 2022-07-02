@@ -3,11 +3,7 @@ import { Box, Grid, withStyles, Paper } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { Styles } from "./commons/style";
 import { renderText } from "./commons/displayComponents";
-import {
-  renderInputBox,
-  renderSelectBox,
-  renderButton,
-} from "./commons/displayComponents";
+import Step1 from "./steps/Step1";
 
 //Box is block level component
 //this is similar to bootstrap div
@@ -32,6 +28,7 @@ class FormComponents extends Component {
       expectedSalary: "",
     },
     errors: {},
+    currentStep: 0,
   };
 
   render() {
@@ -46,7 +43,14 @@ class FormComponents extends Component {
     };
 
     const handleNext = () => {
-      console.log("handle Nextr cliek");
+      let { currentStep } = this.state;
+      currentStep += currentStep + 1;
+      this.setState({ currentStep });
+    };
+    const handlePrev = () => {
+      let { currentStep } = this.state;
+      currentStep += currentStep - 1;
+      this.setState({ currentStep });
     };
 
     return (
@@ -57,69 +61,11 @@ class FormComponents extends Component {
           </Box>
           <Box component={Paper}>
             <form className={classes.form}>
-              <Box mt={2} mb={2}>
-                {renderText({ label: "Form Component 1" })}
-              </Box>
-
-              <Grid container spacing={2} style={{ marginBottom: "10px" }}>
-                <Grid item xs={12} sm={6}>
-                  {renderInputBox({
-                    label: "FirstName",
-                    name: "firstname",
-                    state: this.state,
-                    handleInputChange,
-                  })}
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  {renderInputBox({
-                    label: "LastName",
-                    name: "lastname",
-                    state: this.state,
-                    handleInputChange,
-                  })}
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} style={{ marginBottom: "10px" }}>
-                <Grid item xs={12}>
-                  {renderSelectBox({
-                    label: "Gender",
-                    name: "gender",
-                    state: this.state,
-                    options: [
-                      { key: "Male", value: "Male" },
-                      { key: "Female", value: "Female" },
-                      { key: "Other", value: "Other" },
-                    ],
-                    handleInputChange,
-                  })}
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} style={{ marginBottom: "10px" }}>
-                <Grid item xs={12} sm={6}>
-                  {renderInputBox({
-                    label: "Phone",
-                    name: "phone",
-                    state: this.state,
-                    handleInputChange,
-                  })}
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  {renderInputBox({
-                    label: "Email",
-                    name: "email",
-                    state: this.state,
-                    handleInputChange,
-                  })}
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} justifyContent="flex-end">
-                <Box p={2}>
-                  {renderButton({
-                    label: "next",
-                    handleOnButttonClick: handleNext,
-                  })}
-                </Box>
-              </Grid>
+              <Step1
+                state={this.state}
+                handleInputChange={handleInputChange}
+                handleNext={handleNext}
+              />
             </form>
           </Box>
         </Grid>

@@ -1,13 +1,12 @@
 import { MenuItem, Typography, Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core";
 
-export const renderText = ({ label, color, align, varient }) => {
+export const renderText = ({ label, color, align, variant }) => {
   return (
     <Typography
       color={color ? color : "primary"}
       align={align ? color : "center"}
-      varient={varient ? varient : "h6"}
+      variant={variant ? variant : "h6"}
     >
       {label}
     </Typography>

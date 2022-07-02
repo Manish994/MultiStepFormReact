@@ -3,7 +3,7 @@ export const Styles = {
     width: "100%",
     height: "98vh",
     display: "flex",
-    flexFlow: "row wrap",
+    flexFlow: "row Wrap",
     justifyContent: "center",
     alignItems: "center",
   },
