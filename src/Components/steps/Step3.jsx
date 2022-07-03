@@ -7,7 +7,12 @@ import {
   renderText,
 } from "../commons/displayComponents";
 
-export default function Step1({ state, handleInputChange, handleNext }) {
+export default function Step3({
+  state,
+  handleInputChange,
+  handleNext,
+  handlePrev,
+}) {
   return (
     <>
       <Box mt={1} mb={2}>
@@ -19,7 +24,6 @@ export default function Step1({ state, handleInputChange, handleNext }) {
             label: "FirstName",
             name: "firstname",
             state,
-            handleInputChange,
           })}
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -67,7 +71,14 @@ export default function Step1({ state, handleInputChange, handleNext }) {
       <Grid container spacing={2} justifyContent="flex-end">
         <Box p={2}>
           {renderButton({
-            label: "next",
+            label: "Back",
+            handleOnButttonClick: handlePrev,
+            color: "default",
+          })}
+        </Box>
+        <Box p={2}>
+          {renderButton({
+            label: "Finish",
             handleOnButttonClick: handleNext,
           })}
         </Box>

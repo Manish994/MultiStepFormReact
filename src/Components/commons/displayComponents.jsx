@@ -80,6 +80,7 @@ export const renderButton = ({
     size="small"
     onClick={handleOnButttonClick}
   >
-    Next
+    {" "}
+    {label}
   </Button>
 );

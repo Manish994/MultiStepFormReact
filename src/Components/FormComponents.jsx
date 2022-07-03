@@ -12,6 +12,9 @@ import PropTypes from "prop-types";
 import { Styles } from "./commons/style";
 import { renderText } from "./commons/displayComponents";
 import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
+import Step3 from "./steps/Step3";
+import Finished from "./steps/Finishsed";
 
 //Box is block level component
 //this is similar to bootstrap div
@@ -53,12 +56,12 @@ class FormComponents extends Component {
     const handleNext = () => {
       let { currentStep } = this.state;
       currentStep = currentStep + 1;
-      console.log(currentStep);
+
       this.setState({ currentStep });
     };
     const handlePrev = () => {
       let { currentStep } = this.state;
-      currentStep += currentStep - 1;
+      currentStep = currentStep - 1;
       this.setState({ currentStep });
     };
 
@@ -67,6 +70,47 @@ class FormComponents extends Component {
       { label: "Education" },
       { label: "Professional" },
     ];
+
+    const getStepsItems = (steps) => {
+      switch (steps) {
+        case 0:
+          return (
+            <Step1
+              state={this.state}
+              handleInputChange={handleInputChange}
+              handleNext={handleNext}
+            />
+          );
+        case 1:
+          return (
+            <Step2
+              state={this.state}
+              handleInputChange={handleInputChange}
+              handleNext={handleNext}
+              handlePrev={handlePrev}
+            />
+          );
+        case 2:
+          return (
+            <Step3
+              state={this.state}
+              handleInputChange={handleInputChange}
+              handleNext={handleNext}
+              handlePrev={handlePrev}
+            />
+          );
+        case 3:
+          return <Finished state={this.state.data} />;
+        default:
+          return (
+            <Step1
+              state={this.state}
+              handleInputChange={handleInputChange}
+              handleNext={handleNext}
+            />
+          );
+      }
+    };
 
     return (
       <Grid container className={classes.formContainer}>
@@ -83,11 +127,7 @@ class FormComponents extends Component {
           </Box>
           <Box component={Paper}>
             <form className={classes.form}>
-              <Step1
-                state={this.state}
-                handleInputChange={handleInputChange}
-                handleNext={handleNext}
-              />
+              {getStepsItems(this.state.currentStep)}
             </form>
           </Box>
         </Grid>
